@@ -32,9 +32,17 @@ knn = KNeighborsClassifier()
 #train dataset ?
 knn.fit(data_learn, classes_learn)
 #
+success_count = 0
+failure_count = 0
 # manual test of prediction after training
 for test,result in zip(test_data,test_classes):
     test_list_item=[]
     test_list_item.append(test)
     predictions = knn.predict(test_list_item)
-    print("real result: " + result + " prediction: " + predictions)
+    if predictions == result:
+        success_count+=1
+        print("prediction succeed: " + predictions)
+    else:
+        failure_count+=1
+        print("prediction failed: " + predictions + " should be: " + result)
+print("prediction results: " + str(success_count) + " success and " + str(failure_count) +"  failed.")
